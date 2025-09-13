@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,width=device-width">
+  <style>/*INLINE_CSS*/</style>
+  <script>
+    const GOOGLE_API_KEY="__API_KEY__",
+          MAP_ID        ="__MAP_ID__",
+          INITIAL_LAT   =__LAT__,
+          INITIAL_LNG   =__LNG__;
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=__API_KEY__&v=beta&libraries=places&callback=init&loading=async" defer></script>
+</head>
+<body>
+  <div id="map"></div>
+  <div id="vrpPanel">
+    <h3>Pickup Planner</h3>
+    <button id="vrpClose" title="Close">✕</button>
+    <div class="row full">
+      <label for="vrpDepot">Depot (address or lat,lng)</label>
+      <input id="vrpDepot" type="text" placeholder="Use current center or search...">
+    </div>
+    <div class="row">
+      <button id="vrpUseCenter" class="mini-btn">Use Center</button>
+      <button id="vrpLocateMe" class="mini-btn">Locate Me</button>
+    </div>
+    <div class="row full">
+      <label for="vrpCapacity">Truck capacity (units)</label>
+      <input id="vrpCapacity" type="number" min="1" step="1" value="100">
+    </div>
+    <div class="row full">
+      <label>Pickup locations</label>
+    </div>
+    <div id="vrpList"></div>
+    <div class="row">
+      <button id="vrpAdd" class="mini-btn">Add Location</button>
+      <button id="vrpSavedBtn" class="mini-btn">Saved</button>
+      <button id="vrpCalc" class="mini-btn primary">Calculate</button>
+    </div>
+    <div class="row full">
+      <label><input id="vrpManualOrder" type="checkbox"> Respect manual order</label>
+    </div>
+    <div id="vrpSummary"></div>
+  </div>
+  <button id="vrpOpen" title="Open Pickup Planner">📦 Planner</button>
+  <div id="vrpInfoPanel" class="vrp-info"></div>
+  
+  <div id="vrpAddModal" class="vrp-modal" style="display:none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <strong>Add Pickup Location</strong>
+        <button id="vrpCloseModal" title="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="row full">
+          <input id="vrpSearch" type="text" placeholder="Search places…">
+          <button id="vrpSearchBtn" class="mini-btn">Search</button>
+        </div>
+        <div id="vrpSearchResults" class="modal-results"></div>
+        <div id="vrpPlaceInfo" class="modal-info"></div>
+        <div class="row full">
+          <label for="vrpPlaceName">Saved name (optional)</label>
+          <input id="vrpPlaceName" type="text" placeholder="e.g., Warehouse A">
+        </div>
+        <div class="row">
+          <button id="vrpAddSelected" class="mini-btn primary">Add to Pickups</button>
+          <button id="vrpSaveSelected" class="mini-btn">Save</button>
+        </div>
+        <div class="row full">
+          <label>Saved Locations</label>
+        </div>
+        <div id="vrpSavedList" class="saved-list"></div>
+      </div>
+    </div>
+  </div>
+  <div id="infoBox" class="info-box"></div>
+  <div id="nextTurn" class="turn-box"></div>
+  <div id="controls">
+    <input id="dest" placeholder="Where to?">
+    <button id="go" disabled>Go</button>
+  </div>
+  <div id="results"></div>
+  <div id="recenter" class="fab" title="Back to me">⌖</div>
+  
+  <script>//INLINE_JS</script>
+</body>
+</html>
