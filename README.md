@@ -506,8 +506,6 @@ src/                                # Application package used by main.py
 Fonts/, Media/                      # Optional fonts and media assets
 cpp_backend/                        # C++ VRP solver (CLI) + CMake build files
 requirements.txt                    # Python dependencies (includes PyQtWebEngine, dotenv)
-cpp_backend/                        # C++ VRP solver (CLI) + CMake build files
-vrp_cpp.py                          # Python wrapper to call the C++ solver
 ```
 
 
@@ -518,7 +516,7 @@ You can offload the VRP (pickup planner) computation to a native C++ backend for
 What’s provided:
 - `cpp_backend/vrp_solver.cpp`: a small CLI app that reads inputs from stdin and prints trip results as JSON.
 - `cpp_backend/CMakeLists.txt`: build configuration.
-- `vrp_cpp.py`: a Python helper to call the solver and (optionally) draw simple polylines on the map.
+- `src/vrp_cpp.py`: a Python helper to call the solver and (optionally) draw simple polylines on the map.
 
 Build steps (Linux/macOS):
 ```
@@ -542,7 +540,7 @@ print(res["trips"])  # list of trips with leg texts and totals
 
 Integration with MapsWidget (as used in main.py):
 - For full fidelity, take the trip orders from the solver and call the in‑page JavaScript `directionsService.route` for each trip to render real routes and metrics (see the Programmatic Control examples to run JS).
-- As a quick approximation, `vrp_cpp.draw_trips_on_maps_widget` shows how to draw straight polylines using Google Maps JS. For production, prefer Directions for accurate travel times.
+- As a quick approximation, you can draw straight polylines using Google Maps JS. For production, prefer Directions for accurate travel times.
 
 Switching strategy:
 - Keep the current in‑page (JS) VRP as a fallback.
@@ -553,3 +551,4 @@ Switching strategy:
 ## License
 
 See `LICENSE`.
+
